@@ -1,4 +1,115 @@
+.header-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 .header {
-  height: 100px;
+  padding: 20px 40px;
   background-color: gray;
+}
+
+.header__navigation {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in;
+}
+
+.navigation {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 125px 50px 40px;
+  flex-direction: column;
+  text-align: left;
+  background-color: #2D303A;
+  width: 270px;
+  height: calc(100vh + 20px);
+  left: calc(370px - 40vw);
+  box-shadow: 20px 0px 20px rgba(0, 0, 0, 0.4);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in;
+}
+
+.header__navigation-active {
+  transform: translateX(60%);
+}
+
+.navigation__item {
+  position: relative;
+  padding-top: 7px;
+  // margin-left: 70px;
+  // margin-top: 80%;
+}
+
+.navigation__item a {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-family: 'LatoBold', sans-serif;
+  font-size: 12px;
+  letter-spacing: -0.005rem;
+}
+
+.hamburger {
+  display: block;
+  position: relative;
+  width: 25px;
+  height: 20px;
+  z-index: 9;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.4s ease-in;
+  color: #ffffff;
+}
+
+.hamburger__line {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 2.4px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transform: translate(-50%, -50%);
+}
+
+.hamburger:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.4px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.hamburger:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.4px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+span.rotate {
+  margin-right: 30px;
+  transform: rotate(90deg);
 }

@@ -15,7 +15,7 @@ import Home from './views/pages/home';
 
 
 const Routes = {
-  '/home': Home,
+  '/': Home,
   // '/calorie-calc': CalcOfFood,
   // '/water-calc': CalcOfWater,
   // '/descr': Description,
@@ -32,13 +32,8 @@ function router() {
   headerContainer.innerHTML = header.render();
   header.afterRender();
 
-  
-  
-
   const request = Utils.parseRequestURL();
   const parsedURL = `/${request.resource || ''}`;
-  // console.log('parsedURL: ', parsedURL);
-  // ${request.action ? `/${request.action}` : ''}
   const page = Routes[parsedURL] ? new Routes[parsedURL]() : new Error404();
 
   contentContainer.innerHTML = page.render();
@@ -47,7 +42,6 @@ function router() {
   footerContainer.innerHTML = footer.render();
   footer.afterRender();
 }
-
 
 
 window.addEventListener('load', router);
