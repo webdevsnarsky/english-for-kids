@@ -1,6 +1,6 @@
 import Component from '../../components/component';
 // import CARDS from '../../components/cards';
-class Home extends Component {
+class Cards extends Component {
   constructor (html) {
     super();
     this.html = html; 
@@ -9,9 +9,7 @@ class Home extends Component {
     render() {
         this.html = 
         `<div class="home"> 
-            <a class="home__card" href="#/main" title="Нажми, чтобы начать!">Начать Игру!
-                <img src="" alt="">
-            </a>
+           
         </div>`;
 
                 return this.html;
@@ -27,13 +25,13 @@ class Home extends Component {
     //     </a>
     // </div>
 
-    afterRender() {
-        this.setActions();
-    }
+    // afterRender() {
+    //     this.setActions();
+    // }
 
     // setActions() {
-        
+
     // }
 }
 
-export default Home;
+export default Cards;

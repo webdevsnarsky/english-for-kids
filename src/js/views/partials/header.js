@@ -1,10 +1,14 @@
-import Component from '../component';
-import CARDS from '../../cards';
+import Component from '../../components/component';
+// import CARDS from '../../components/cards';
 
 class Header extends Component {
+    // constructor() {
+    //     super();
+    //     // this.inputChecked = false;
+    // }
 
     render() {
-        const [resource] = this.request.resource;
+        // const resource = this.request.resource;
 
         const html = 
         `<header class="header">  
@@ -12,19 +16,19 @@ class Header extends Component {
                 <span class="hamburger__line"></span>
             </span>
                 <ul class="navigation">
-                    <li class="navigation__item"><a class="navigation__link active" href="#home">Main Page</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#services">Action (set A)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#portfolio">Action (set B)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#about">Action (set C)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#contact">Adjective</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#contact">Animal (set A)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#contact">Animal (set B)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#contact">Clothes</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#contact">Emotion</a></li>
+                    <li class="navigation__item"><a class="navigation__link active" href="#/main">Main Page</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Action (set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Action (set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Action (set C)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Adjective</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Animal (set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Animal (set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Clothes</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Emotion</a></li>
                 </ul>
 
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" class="switch__input" ${localStorage.inputChecked === 'true' ? 'checked' : ''}>
                     <span class="slider round"></span>
                 </label>
         </header>`;
@@ -33,7 +37,6 @@ class Header extends Component {
     }
 
     afterRender() {
-        // this.getCurrentDate();
         this.setActions();
     }
 
@@ -41,12 +44,14 @@ class Header extends Component {
         const header = document.querySelector('.header');
         const hamburger = document.querySelector('.hamburger');
         const navigation = document.querySelector('.navigation');
+        const switchInput = document.querySelector('.switch__input');
+        
+       switchInput.addEventListener('change', () => {this.getCheckedInput()});
 
         header.addEventListener('click', event => {
             this.target = event.target;
-            // console.log('this.target: ', this.target);
             const targetClassList = this.target.classList;
-
+            
             switch (true) {
                 case (targetClassList.contains('hamburger') && !this.target.classList.contains('toggle') ||
                 targetClassList.contains('hamburger__line') && !hamburger.classList.contains('toggle')): 
@@ -56,7 +61,6 @@ class Header extends Component {
                 case targetClassList.contains('navigation__link'): 
                     this.removeNavigationMenu(hamburger, navigation);
                 break;
-
                 default:
             }
 
@@ -73,18 +77,45 @@ class Header extends Component {
         hamburger.classList.remove('toggle');
     }
 
-    // getCurrentDate() {
-    //     const addNowDate = document.getElementsByClassName('header-date')[0];
-    //     let currentDate = new Date();
-    //     let year = currentDate.getFullYear();
-    //     let month = currentDate.getMonth();
-    //     month = `${month + 1}`;
-    //     let day = currentDate.getDate();
+    getCheckedInput() {
+        if (localStorage.inputChecked === 'false')  {
+            localStorage.inputChecked = 'true';
+            this.inputChecked = true;
+            
+        } else {
+            localStorage.inputChecked = 'false';
+            this.inputChecked = false;
+            
+        }
         
-    //     addNowDate.innerHTML = `${day}/${month}/${year}`;
-    // }  
+        this.changeColorOfElem();
+    }
 
+    changeColorOfElem() {
+        this.switchInput = document.querySelector('.switch__input');
+        this.mainCard = document.querySelectorAll('.main__card');
 
+        switch (localStorage.inputChecked) {
+            case 'true':
+                this.mainCard.forEach(card => card.classList.add('green'));
+                break;
+            case 'false':
+                this.mainCard.forEach(card => card.classList.remove('green'));
+
+                break;
+            default:
+                break;
+        }
+
+        // if (localStorage.inputChecked === 'true') {
+        //     this.mainCard.forEach(card => card.classList.add('green'));
+        //     this.switchInput.checked = true;
+          
+        // } else {
+        //     this.mainCard.forEach(card => card.classList.remove('green'));
+        //     this.switchInput.checked = false;   
+        // }
+      }
 
     // <div class="header-date"></div>                  
                    
@@ -94,15 +125,6 @@ class Header extends Component {
     // <a class="header__link btn-start__orange ${resource === 'calorie-calc' ? 'active' : ''}" href="/#/calorie-calc">
     //     <i class="fas fa-utensils"></i>
     //  </a> 
-    //  <a class="header__link btn-start__blue ${resource === 'water-calc' ? 'active' : ''}" href="/#/water-calc">
-    //     <i class="fas fa-tint"></i>
-    // </a>
-    //  <a class="header__link btn-start__green ${resource === 'descr' ? 'active' : ''}" href="/#/descr">
-    //     <i class="fas fa-pen"></i>
-    //  </a>      
-    //  <a class="header__link btn-start__gray ${resource === 'faq' ? 'active' : ''}" href="/#/faq">
-    //     <i class="far fa-question-circle"></i>
-    //  </a>  
 }
 
 export default Header;

@@ -1,25 +1,22 @@
 import '../css/style.css';
 import '../css/style.scss';
-// import {
-//   moduleOne
-// } from './moduleOne';
-// import CARDS from './cards';
+
 import Utils from './helpers/utils';
 
 import Header from './views/partials/header';
 import Footer from './views/partials/footer';
 import Error404 from './views/pages/error404';
+import Cards from './views/pages/cards';
 
 
 import Home from './views/pages/home';
+import Main from './views/pages/main';
 
 
 const Routes = {
   '/': Home,
-  // '/calorie-calc': CalcOfFood,
-  // '/water-calc': CalcOfWater,
-  // '/descr': Description,
-  // '/faq': FAQ
+  '/main': Main,
+  '/cards': Cards,
 };
 
 function router() {
@@ -29,19 +26,22 @@ function router() {
   const header = new Header();
   const footer = new Footer();
 
-  headerContainer.innerHTML = header.render();
-  header.afterRender();
-
   const request = Utils.parseRequestURL();
   const parsedURL = `/${request.resource || ''}`;
   const page = Routes[parsedURL] ? new Routes[parsedURL]() : new Error404();
 
-  contentContainer.innerHTML = page.render();
-  page.afterRender(); 
 
+  headerContainer.innerHTML = header.render();
+  contentContainer.innerHTML = page.render();
   footerContainer.innerHTML = footer.render();
+
+
+  header.afterRender();
+  page.afterRender();
   footer.afterRender();
 }
+
+
 
 
 window.addEventListener('load', router);
