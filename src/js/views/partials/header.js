@@ -1,4 +1,5 @@
 import Component from '../component';
+import CARDS from '../../cards';
 
 class Header extends Component {
 
@@ -10,16 +11,22 @@ class Header extends Component {
             <span class="header__hamburger hamburger">
                 <span class="hamburger__line"></span>
             </span>
-
-            <nav class="header__navigation">
                 <ul class="navigation">
-                    <li class="navigation__item"><a class="navigation__link active" href="#home">Home</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#services">Services</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#portfolio">Portfolio</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#about">About</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#contact">Contact</a></li>
+                    <li class="navigation__item"><a class="navigation__link active" href="#home">Main Page</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#services">Action (set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#portfolio">Action (set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#about">Action (set C)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#contact">Adjective</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#contact">Animal (set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#contact">Animal (set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#contact">Clothes</a></li>
+                    <li class="navigation__item"><a class="navigation__link" href="#contact">Emotion</a></li>
                 </ul>
-            </nav>
+
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
         </header>`;
 
         return html;
@@ -32,22 +39,22 @@ class Header extends Component {
 
     setActions() {
         const header = document.querySelector('.header');
-        const headerNavigation = document.querySelector('.header__navigation');
         const hamburger = document.querySelector('.hamburger');
         const navigation = document.querySelector('.navigation');
 
         header.addEventListener('click', event => {
             this.target = event.target;
+            // console.log('this.target: ', this.target);
             const targetClassList = this.target.classList;
 
             switch (true) {
-                case (targetClassList.contains('hamburger') && !this.target.classList.contains('rotate')): 
-                this.getNavigationMenu(headerNavigation, hamburger, navigation);
+                case (targetClassList.contains('hamburger') && !this.target.classList.contains('toggle') ||
+                targetClassList.contains('hamburger__line') && !hamburger.classList.contains('toggle')): 
+                    this.getNavigationMenu(hamburger, navigation);
                 break;
-                case targetClassList.contains('rotate'): 
-                case targetClassList.contains('header__navigation'): 
+                case targetClassList.contains('toggle'): 
                 case targetClassList.contains('navigation__link'): 
-                this.removeNavigationMenu(headerNavigation, hamburger, navigation);
+                    this.removeNavigationMenu(hamburger, navigation);
                 break;
 
                 default:
@@ -56,17 +63,14 @@ class Header extends Component {
         });
     }
 
-    getNavigationMenu(headerNavigation, hamburger, navigation) {
-        headerNavigation.classList.add('header__navigation-active');
+    getNavigationMenu(hamburger, navigation) {
         navigation.classList.add('navigation-active');
-        document.body.classList.add('scroll-hidden');
-        hamburger.classList.add('rotate');
+        hamburger.classList.toggle('toggle');
     }
 
-    removeNavigationMenu(headerNavigation, hamburger, navigation) {
-        headerNavigation.classList.remove('header__navigation-active');
+    removeNavigationMenu(hamburger, navigation) {
         navigation.classList.remove('navigation-active');
-        hamburger.classList.remove('rotate');
+        hamburger.classList.remove('toggle');
     }
 
     // getCurrentDate() {
