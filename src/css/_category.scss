@@ -7,20 +7,21 @@
 }
 
 .category__card {
-  width: 250px;
-  height: 250px;
+  // width: 250px;
+  // height: 250px;
   border-radius: 5px;
   color: #212529;
-  display: flex;
-  flex-direction: column;
-  font-family: Roboto;
+  // display: flex;
+  // flex-direction: column;
+  font-family: LatoBold, sans-serif;
   font-size: 24px;
-  line-height: 36px;
-  font-weight: 400;
-  text-align: center;
+  // line-height: 36px;
+  // font-weight: 400;
+  // text-align: center;
   text-decoration: none;
   background-color: gray;
   margin: 5px;
+  perspective: 600px;
 }
 
 .category__card:hover {
@@ -33,8 +34,8 @@
 }
 
 .card {
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  height: 250px;
   transition: transform 1s;
   transform-style: preserve-3d;
   cursor: pointer;
@@ -46,30 +47,54 @@
 }
 
 .card__face {
+  display: flex;
   position: absolute;
-  width: 150px;
-  height: 150px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  line-height: 260px;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
-  -webkit-backface-visibility: hidden;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  -webkit-transition: .3s;
+  transition: .3s;
   backface-visibility: hidden;
-  border-radius: 50%;
 }
 
-// .card__face--front {
-//   background: red;
-// }
-
 .card__face--back {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   transform: rotateY(180deg);
+}
+
+.card__text {
+  margin-top: 167px;
+  padding: 0 15px;
+  font-size: 24px;
+  line-height: 45px;
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
+  background: #fff;
+  color: #212529;
+}
+
+.card__rotate {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url("../img/rotate.png");
+  background-size: 32px;
+  background-repeat: no-repeat;
+  background-position: center 16px;
+  bottom: 5px;
+  right: 5px;
+  -webkit-transition: .3s;
+  transition: .3s;
+  // background: gray;
+}
+
+.audio {
+  width: 200px;
+  height: 20px;
 }
