@@ -11,30 +11,12 @@ class Main extends Component {
     render() {
         this.html = 
         `<div class="main"> 
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!">
-                <img src="" alt="">
-            </a>
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!"">
-                <img src="" alt="">
-            </a>
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!"">
-                <img src="" alt="">
-            </a>
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!"">
-                <img src="" alt="">
-            </a>
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!"">
-                <img src="" alt="">
-            </a>
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!"">
-                <img src="" alt="">
-            </a>
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!"">
-                <img src="" alt="">
-            </a>
-            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!"">
-                <img src="" alt="">
-            </a>
+            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!">Action (Set A)</a>
+            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!">Action (Set B)</a>
+            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!">Animal (Set A)</a>
+            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!">Animal (Set B)</a>
+            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!">Clothes</a>
+            <a class="main__card ${localStorage.inputChecked === 'true' ? 'green' : ''}" href="#/cards" title="Нажми, чтобы начать!">Emotion</a>
         </div>`;
 
                 return this.html;
@@ -42,33 +24,24 @@ class Main extends Component {
 
     afterRender() {
         this.setActions();
-        // this.switchInput = document.querySelector('.switch__input');
-        // this.switchInput.addEventListener('change', () => {this.getCheckedInput()});
     }
     
-
-
-
-    // changeColorOfElem() {
-    //   this.mainCard = document.querySelectorAll('.main__card');
-     
-    //   if (localStorage.inputChecked === 'true') {
-    //     this.switchInput.checked = true;
-    //     this.mainCard.forEach(card => card.classList.add('green'));
-    //   //   this.mainCard.classList.add('green');
-    //   } else {
-    //       this.mainCard.forEach(card => card.classList.remove('green'));
-    //       this.switchInput.checked = false;
-    //   }
-    // }
-    // this.switchInput.setAttribute('checked', 'checked');
-    // setActions() {
-    //   // const switchInput = document.querySelector('.switch__input');
-
-    //   // switchInput.addEventListener('change', () => {this.getCheckedInput()});
-    //   // window.addEventListener('storage', () => {this.changeColorOfElem()});
-      
-    // }
+    setActions() {
+        this.mainContent = document.querySelector('.main');
+        this.mainContent.addEventListener('click', (event) => {
+            this.target = event.target;
+            localStorage.Category = this.target.textContent;
+  
+            // switch(true) {
+            //   case targetClassList.contains('card'):
+            //     this.turnAroundCard();
+            //     break;
+            //   default:
+            //     break;
+            // }
+  
+          });
+    }
 
     
 }

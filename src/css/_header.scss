@@ -27,6 +27,7 @@
   transition: transform 0.5s ease-in;
   transform: translateX(-108%);
   user-select: none;
+  z-index: 1;
 }
 
 .navigation-active {

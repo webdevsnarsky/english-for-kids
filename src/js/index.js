@@ -1,5 +1,6 @@
 import '../css/style.css';
 import '../css/style.scss';
+// import '../img/cry.jpg';
 
 import Utils from './helpers/utils';
 
@@ -42,14 +43,16 @@ function router() {
 }
 
 
-
-
 window.addEventListener('load', router);
 window.addEventListener('hashchange', router);
+window.addEventListener("unload", () => {
+  localStorage.inputChecked = false;
+});
 
 
 
 
+export {router};
 
 
 

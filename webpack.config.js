@@ -29,7 +29,8 @@ const config = {
   entry: {index: './src/js/index.js'},
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    // publicPath: './src/img'
   },
   mode: setDMode(),
   devtool: setDevTool(),
@@ -93,7 +94,7 @@ const config = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: 'img',
+              outputPath: 'img/',
               name: '[name].[ext]'
             }},
           {
@@ -154,7 +155,7 @@ const config = {
     new CopyWebpackPlugin([
        {from: './src/audio', to: './audio'},
       // {from: './src/static', to: './'},
-      // {from: './src/img', to: './img/'},
+      {from: './src/img', to: './img'},
     ]),
   ],
 

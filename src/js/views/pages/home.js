@@ -27,9 +27,9 @@ class Home extends Component {
     //     </a>
     // </div>
 
-    afterRender() {
-        this.setActions();
-    }
+    // afterRender() {
+    //     this.setActions();
+    // }
 
     // setActions() {
         
