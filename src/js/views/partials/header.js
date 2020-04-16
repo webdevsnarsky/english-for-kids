@@ -34,27 +34,32 @@ class Header extends Component {
     }
 
     setActions() {
-        const header = document.querySelector('.header');
-        const hamburger = document.querySelector('.hamburger');
-        const navigation = document.querySelector('.navigation');
-        const switchInput = document.querySelector('.switch__input');
+        this.header = document.querySelector('.header');
+        this.hamburger = document.querySelector('.hamburger');
+        this.navigation = document.querySelector('.navigation');
+        this.switchInput = document.querySelector('.switch__input');
         
-       switchInput.addEventListener('change', () => {this.getCheckedInput()});
+       this.switchInput.addEventListener('change', () => {
+           this.getCheckedInput();
+        });
 
-        header.addEventListener('click', event => {
+        this.header.addEventListener('click', event => {
             this.target = event.target;
             const targetClassList = this.target.classList;
             
             switch (true) {
+                // case (localStorage.inputChecked === 'true' && (targetClassList.contains('card__face'))):
+                //     this.startGameMode();
+                // break;
                 case (targetClassList.contains('hamburger') && !this.target.classList.contains('toggle') ||
-                targetClassList.contains('hamburger__line') && !hamburger.classList.contains('toggle')): 
-                    this.getNavigationMenu(hamburger, navigation);
+                targetClassList.contains('hamburger__line') && !this.hamburger.classList.contains('toggle')): 
+                    this.getNavigationMenu();
                 break;
                 case targetClassList.contains('toggle'):
-                    this.removeNavigationMenu(hamburger, navigation);
+                    this.removeNavigationMenu();
                 break;
                 case targetClassList.contains('navigation__link'): 
-                    this.removeNavigationMenu(hamburger, navigation);
+                    this.removeNavigationMenu();
                     this.setDataOpenCategory();
                 break;
                 default:
@@ -64,43 +69,42 @@ class Header extends Component {
         });
     }
 
-    getNavigationMenu(hamburger, navigation) {
-        navigation.classList.add('navigation-active');
-        hamburger.classList.toggle('toggle');
+    getNavigationMenu() {
+        this.navigation.classList.add('navigation-active');
+        this.hamburger.classList.toggle('toggle');
     }
 
-    removeNavigationMenu(hamburger, navigation) {
-        navigation.classList.remove('navigation-active');
-        hamburger.classList.remove('toggle');
+    removeNavigationMenu() {
+        this.navigation.classList.remove('navigation-active');
+        this.hamburger.classList.remove('toggle');
     }
 
     getCheckedInput() {
         if (localStorage.inputChecked === 'false')  {
             localStorage.inputChecked = 'true';
             this.inputChecked = true;
-            
+            this.startGameMode();
         } else {
             localStorage.inputChecked = 'false';
             this.inputChecked = false;
-            
+            this.stopGameMode();
         }
         
         this.changeColorOfElem();
     }
 
     changeColorOfElem() {
-        this.switchInput = document.querySelector('.switch__input');
         this.mainCard = document.querySelectorAll('.main__card');
-        this.categoryCard = document.querySelectorAll('.category__card');
+        // this.categoryCard = document.querySelectorAll('.category__card');
 
         switch (localStorage.inputChecked) {
             case 'true':
                 this.mainCard.forEach(card => card.classList.add('green'));
-                this.categoryCard.forEach(card => card.classList.add('green'));
+                // this.categoryCard.forEach(card => card.classList.add('green'));
                 break;
             case 'false':
                 this.mainCard.forEach(card => card.classList.remove('green'));
-                this.categoryCard.forEach(card => card.classList.remove('green'));
+                // this.categoryCard.forEach(card => card.classList.remove('green'));
                 break;
             default:
                 break;
@@ -110,7 +114,29 @@ class Header extends Component {
       setDataOpenCategory() {
         localStorage.Category = this.target.textContent;
         router();
+
+        // clear container 
+        // 
       }
+
+      startGameMode() {
+        this.allCardFace = document.querySelectorAll('.card__face');
+        this.allCardText = document.querySelectorAll('.card__text');
+        this.allCardRotate = document.querySelectorAll('.card__rotate');
+        this.cardsButtonGame = document.querySelector('.cards__button-game');
+        
+        this.allCardFace.forEach(item => item.classList.add('card__cover'));
+        this.allCardText.forEach(item => item.classList.add('hidden'));
+        this.allCardRotate.forEach(item => item.classList.add('hidden'));
+        this.cardsButtonGame.classList.remove('hidden');
+       }
+
+       stopGameMode() {
+        this.allCardFace.forEach(item => item.classList.remove('card__cover'));
+        this.allCardText.forEach(item => item.classList.remove('hidden'));
+        this.allCardRotate.forEach(item => item.classList.remove('hidden'));
+        this.cardsButtonGame.classList.add('hidden');
+       }
 }
 
 export default Header;

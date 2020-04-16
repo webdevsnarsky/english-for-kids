@@ -94,7 +94,15 @@
   // background: gray;
 }
 
-.audio {
-  width: 200px;
-  height: 20px;
+.hidden {
+  display: none;
+}
+
+.card__cover {
+  background-size: cover;
+  background-position: 50%;
+}
+
+.cards__button-game {
+  margin: 30px auto 0;
 }

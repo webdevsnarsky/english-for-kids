@@ -9,7 +9,11 @@ class Cards extends Component {
 
     render() {
         this.html = 
-        `<div class="cards"></div>`;
+        `<button class="cards__button-game hidden ">Start game</button>
+        <div class="cards">
+        
+        <audio class="audio" src=""></audio>
+        </div>`;
 
       return this.html;
     }
@@ -21,6 +25,8 @@ class Cards extends Component {
 
     createCards() {
       this.cardsContainer = document.querySelector('.cards');
+      this.cardsButtonGame = document.querySelector('.cards__button-game');
+      this.parentElem = this.cardsButtonGame.parentNode;
       let res = '';
       this.i = 0;
 
@@ -55,10 +61,9 @@ class Cards extends Component {
           <div class="card__face card__face--back" style="background-image: url(${card.image});"><span class="card__text">${card.translation}</span></div>
           <div class="card__rotate"></div>
         </div>
-        <audio class="audio" src=""></audio>
       </div>`;
       })
-      this.cardsContainer.innerHTML = res;
+      this.cardsContainer.innerHTML += res;
     }
 
     setActions() {
@@ -70,11 +75,12 @@ class Cards extends Component {
 
         this.cardsContainer.addEventListener('click', (event) => {
           this.target = event.target;
+          // console.log( this.target.closest('card'));
           // console.log('this.target: ', this.target);
           // console.log(event.currentTarget);
           const targetClassList = this.target.classList;
           // console.log('targetClassList: ', targetClassList);
-
+          // debugger;
           switch(true) {
             case targetClassList.contains('card__face'):
               this.playAudio();
@@ -87,17 +93,29 @@ class Cards extends Component {
        }
 
        playAudio() {
-        this.audioPlay = document.querySelector('.audio');
+        if (localStorage.inputChecked === 'false') {
+          this.audioPlay = document.querySelector('.audio');
 
         this.CARDS.default[this.i].forEach(card => {
           if (card.word === this.target.textContent) {
             this.audioPlay.src = card.audioSrc;
           }
-          this.audioPlay.play();
+
+          const  playPromise = this.audioPlay.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              throw new Error();
+            })
+            .catch(() => {
+             
+            });
+          }
         });
+        }
+
        }
 
-    turnAroundCard() {
+      turnAroundCard() {
       
       // this.card.forEach(item =>  item.classList.add('is-flipped'));
 

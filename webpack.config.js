@@ -152,6 +152,7 @@ const config = {
       filename: 'style.css',
     }),
     new HtmlWebPackPlugin({
+      favicon: './src/favicon.ico',
       template: './src/index.html',
       filename: './index.html'
     }),
