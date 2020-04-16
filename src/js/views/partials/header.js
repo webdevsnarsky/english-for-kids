@@ -83,11 +83,11 @@ class Header extends Component {
         if (localStorage.inputChecked === 'false')  {
             localStorage.inputChecked = 'true';
             this.inputChecked = true;
-            this.startGameMode();
+            // this.startGameMode();
         } else {
             localStorage.inputChecked = 'false';
             this.inputChecked = false;
-            this.stopGameMode();
+            // this.stopGameMode();
         }
         
         this.changeColorOfElem();
@@ -119,24 +119,6 @@ class Header extends Component {
         // 
       }
 
-      startGameMode() {
-        this.allCardFace = document.querySelectorAll('.card__face');
-        this.allCardText = document.querySelectorAll('.card__text');
-        this.allCardRotate = document.querySelectorAll('.card__rotate');
-        this.cardsButtonGame = document.querySelector('.cards__button-game');
-        
-        this.allCardFace.forEach(item => item.classList.add('card__cover'));
-        this.allCardText.forEach(item => item.classList.add('hidden'));
-        this.allCardRotate.forEach(item => item.classList.add('hidden'));
-        this.cardsButtonGame.classList.remove('hidden');
-       }
-
-       stopGameMode() {
-        this.allCardFace.forEach(item => item.classList.remove('card__cover'));
-        this.allCardText.forEach(item => item.classList.remove('hidden'));
-        this.allCardRotate.forEach(item => item.classList.remove('hidden'));
-        this.cardsButtonGame.classList.add('hidden');
-       }
 }
 
 export default Header;

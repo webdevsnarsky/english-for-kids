@@ -7,17 +7,10 @@
 }
 
 .category__card {
-  // width: 250px;
-  // height: 250px;
   border-radius: 5px;
   color: #212529;
-  // display: flex;
-  // flex-direction: column;
   font-family: LatoBold, sans-serif;
   font-size: 24px;
-  // line-height: 36px;
-  // font-weight: 400;
-  // text-align: center;
   text-decoration: none;
   background-color: gray;
   margin: 5px;
@@ -105,4 +98,9 @@
 
 .cards__button-game {
   margin: 30px auto 0;
+}
+
+.disabledbutton {
+  pointer-events: none;
+  opacity: 0.4;
 }
