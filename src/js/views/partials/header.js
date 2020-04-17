@@ -95,16 +95,16 @@ class Header extends Component {
 
     changeColorOfElem() {
         this.mainCard = document.querySelectorAll('.main__card');
-        // this.categoryCard = document.querySelectorAll('.category__card');
+        this.categoryCard = document.querySelectorAll('.category__card');
 
         switch (localStorage.inputChecked) {
             case 'true':
                 this.mainCard.forEach(card => card.classList.add('green'));
-                // this.categoryCard.forEach(card => card.classList.add('green'));
+                this.categoryCard.forEach(card => card.classList.add('green'));
                 break;
             case 'false':
                 this.mainCard.forEach(card => card.classList.remove('green'));
-                // this.categoryCard.forEach(card => card.classList.remove('green'));
+                this.categoryCard.forEach(card => card.classList.remove('green'));
                 break;
             default:
                 break;

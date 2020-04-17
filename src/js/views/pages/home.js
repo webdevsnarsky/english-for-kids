@@ -9,9 +9,7 @@ class Home extends Component {
     render() {
         this.html = 
         `<div class="home"> 
-            <a class="home__card" href="#/main" title="Нажми, чтобы начать!">Начать Игру!
-                <img src="" alt="">
-            </a>
+            <a class="home__link" href="#/main" title="Нажми, чтобы начать!">Начать Игру!</a>
         </div>`;
 
                 return this.html;

@@ -68,6 +68,7 @@ class Cards extends Component {
 
     setActions() {
       this.contentCards = document.querySelector('.cards');
+      this.contentCard = document.querySelectorAll('.card');
       this.switchInput = document.querySelector('.switch');
       this.allCardFace = document.querySelectorAll('.card__face');
       this.allCardText = document.querySelectorAll('.card__text');
@@ -158,6 +159,8 @@ class Cards extends Component {
 
       this.allCardText.forEach(item => item.classList.remove('hidden'));
       this.allCardRotate.forEach(item => item.classList.remove('hidden'));
+      this.contentCard.forEach(item => item.classList.remove('green'));
+
       this.cardsButtonGame.classList.add('hidden');
       this.arrayOfSounds = [];
       this.newArrSounds = [];
@@ -196,6 +199,7 @@ class Cards extends Component {
           this.getfinishPage();
         } else {
           this.rating = true;
+          this.target.closest('.card').classList.add('green');
           this.audio = new Audio('../../../audio/correct.mp3');
         this.audio.play();
           this.startPlayContain();
@@ -228,6 +232,7 @@ class Cards extends Component {
       this.ratingContainer.innerHTML = '';
       this.cardsButtonGame.classList.add('hidden');
       this.ratingElem = document.createElement('div');
+      this.contentCard.forEach(item => item.classList.remove('green'));
        
       if (this.countErrors === 0) {
         this.ratingElem.innerHTML = `<div class="results">Не допустил ни одной Ошибки. Ты молодец!!!</div>`;

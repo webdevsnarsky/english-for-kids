@@ -1,7 +1,7 @@
 .content-container {
   width: 100%;
+  height: 100%;
   max-width: 1280px;
-  margin: auto 0;
 }
 
 .main {
@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 20px 60px;
-  margin: auto;
+  margin: 100px 20px;
 }
 
 .main__card {
@@ -19,14 +19,22 @@
   color: #212529;
   display: flex;
   flex-direction: column;
-  font-family: Roboto;
   font-size: 24px;
   line-height: 36px;
   font-weight: 400;
   text-align: center;
   text-decoration: none;
   background-color: gray;
-  margin: 5px;
+  margin: 10px;
+}
+
+.main__card-bgc {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.main__card-text {
+  margin-top: 185px;
 }
 
 .main__card:hover {
