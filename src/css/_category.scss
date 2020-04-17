@@ -104,3 +104,29 @@
   pointer-events: none;
   opacity: 0.4;
 }
+
+.rating {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: 40px;
+  // overflow-x: hidden;
+  overflow-y: hidden;
+  margin: 10px 40px 0;
+}
+
+.rating__error {
+  height: 40px;
+  width: 40px;
+  background-image: url('../img/rating/error.png');
+  background-size: cover;
+  margin: 0 5px;
+}
+
+.rating__correct {
+  height: 40px;
+  width: 40px;
+  background-image: url('../img/rating/correct.png');
+  background-size: cover;
+  margin: 0 5px;
+}

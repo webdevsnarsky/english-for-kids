@@ -13,9 +13,8 @@ class Cards extends Component {
     render() {
         this.html = 
         `<button class="cards__button-game ${localStorage.inputChecked === 'true' ? '' : 'hidden'}" data-word="">Start game</button>
-        <div class="cards">
-    
-        </div>`;
+        <div class="rating"></div>
+        <div class="cards"></div>`;
 
       return this.html;
     }
@@ -74,11 +73,13 @@ class Cards extends Component {
       this.allCardText = document.querySelectorAll('.card__text');
       this.allCardRotate = document.querySelectorAll('.card__rotate');
       this.cardsButtonGame = document.querySelector('.cards__button-game');
+      this.ratingContainer = document.querySelector('.rating');
       this.firstWordOfNewArr = null;
       this.arrayOfSounds = [];
       this.getArrayOfAudio();
       this.newArrSounds = this.arrayOfSounds.sort(() => Math.random() - 0.5);
       this.cardsButtonGame.addEventListener('click', () => {this.startPlayContain()});
+      this.countErrors = 0;
 
      // добавление карточек крутящихся
      
@@ -118,89 +119,132 @@ class Cards extends Component {
               break;
           }
         });
-       }
+    }
 
-       getArrayOfAudio() {
-        this.CARDS.default[this.i].forEach(card => {
-          this.arrayOfSounds.push(card.word);  
-        });
+    getArrayOfAudio() {
+      this.CARDS.default[this.i].forEach(card => {
+        this.arrayOfSounds.push(card.word);  
+      });
+    }
+
+    playAudioTrain() {
+      const audio = new Audio(`../../../audio/${this.dataInfo}.mp3`);
+      setTimeout(()=>{
+          audio.play();
+      }, 100);
+    }
+
+    getCheckedInput() {
+      if (localStorage.inputChecked === 'true')  {
+          this.startGameMode();
+      } else {
+          this.stopGameMode();
       }
+    }
 
-      playAudioTrain() {
-          const audio = new Audio(`../../../audio/${this.dataInfo}.mp3`);
-          setTimeout(()=>{
-              audio.play();
-          }, 100)
+    startGameMode() {        
+      this.allCardFace.forEach(item => item.classList.add('card__cover'));
+      this.allCardText.forEach(item => item.classList.add('hidden'));
+      this.allCardRotate.forEach(item => item.classList.add('hidden'));
+      this.cardsButtonGame.classList.remove('hidden');
+      this.newArrSounds = this.arrayOfSounds.sort(() => Math.random() - 0.5);
+    }
+
+    stopGameMode() {
+      this.allCardFace.forEach(item => {
+        item.classList.remove('card__cover');
+        item.classList.remove('disabledbutton');
+      });
+
+      this.allCardText.forEach(item => item.classList.remove('hidden'));
+      this.allCardRotate.forEach(item => item.classList.remove('hidden'));
+      this.cardsButtonGame.classList.add('hidden');
+      this.arrayOfSounds = [];
+      this.newArrSounds = [];
+      this.getArrayOfAudio();
+      this.ratingContainer.innerHTML = '';
+
+    }
+
+    startPlayContain () {
+      this.firstWordOfNewArr = this.newArrSounds[0];
+      this.audio = new Audio(`../../../audio/${this.firstWordOfNewArr}.mp3`);
+      switch (true) {
+        case (this.cardsButtonGame.textContent === 'Start game' 
+        || this.newArrSounds.length < 8 
+        && this.cardsButtonGame.textContent === 'Repeat the word?'):
+          this.cardsButtonGame.textContent = 'Repeat the word?';
+          this.cardsButtonGame.classList.add('repeat');
+          this.audio.play();
+          break;
+        case this.cardsButtonGame.textContent === 'Repeat the word?':
+          this.audio.play();
+          break;
+        default:
+          break;
       }
+    }
 
-       getCheckedInput() {
-        if (localStorage.inputChecked === 'true')  {
-            this.startGameMode();
+    checkUserChoose() {
+      this.rating = null;
+      if (this.firstWordOfNewArr === this.dataInfo) {
+        this.target.classList.add('disabledbutton');
+        this.newArrSounds.shift();
+        if (!this.newArrSounds.length) {
+          this.audio = new Audio('../../../audio/success.mp3');
+          this.audio.play();
+          this.getfinishPage();
         } else {
-            this.stopGameMode();
+          this.rating = true;
+          this.audio = new Audio('../../../audio/correct.mp3');
+        this.audio.play();
+          this.startPlayContain();
+          this.getRatingOfUser();
         }
+      } else {
+        this.rating = false;
+        this.countErrors += 1;
+        this.audio = new Audio('../../../audio/error.mp3');
+        this.audio.play();
+        this.getRatingOfUser();
 
-       }
+      }
+    }
 
-       startGameMode() {        
-        this.allCardFace.forEach(item => item.classList.add('card__cover'));
-        this.allCardText.forEach(item => item.classList.add('hidden'));
-        this.allCardRotate.forEach(item => item.classList.add('hidden'));
-        this.cardsButtonGame.classList.remove('hidden');
-        this.newArrSounds = this.arrayOfSounds.sort(() => Math.random() - 0.5);
-       }
+    getRatingOfUser() {
+      this.ratingElem = document.createElement('div');
 
-       stopGameMode() {
-        this.allCardFace.forEach(item => {
-          item.classList.remove('card__cover');
-          item.classList.remove('disabledbutton');
-        });
-        this.allCardText.forEach(item => item.classList.remove('hidden'));
-        this.allCardRotate.forEach(item => item.classList.remove('hidden'));
-        this.cardsButtonGame.classList.add('hidden');
-        this.arrayOfSounds = [];
-        this.newArrSounds = [];
-        this.getArrayOfAudio();
-       }
+      if (!this.rating) {
+        this.ratingElem.innerHTML = `<div class="rating__elem rating__error"></div>`;
+      } else {
+        // this.ratingElemCorrect = `<div class="rating__elem rating__correct"></div>`;
+        this.ratingElem.innerHTML = `<div class="rating__elem rating__correct"></div>`;
+      }
+      this.ratingContainer.prepend(this.ratingElem);
+    }
 
-       startPlayContain () {
-        this.firstWordOfNewArr = this.newArrSounds[0];
-        this.audio = new Audio(`../../../audio/${this.firstWordOfNewArr}.mp3`);
-        switch (true) {
-              case (this.cardsButtonGame.textContent === 'Start game' 
-              || this.newArrSounds.length < 8 
-              && this.cardsButtonGame.textContent === 'Repeat the word?'):
-                this.cardsButtonGame.textContent = 'Repeat the word?';
-                this.cardsButtonGame.classList.add('repeat');
-                
-               this.audio.play();
-                break;
-              case this.cardsButtonGame.textContent === 'Repeat the word?':
-                this.audio.play();
-                break;
-              default:
-                break;
-            }
-       }
+    getfinishPage() {
+      this.cardsContainer.innerHTML = '';
+      this.ratingContainer.innerHTML = '';
+      this.cardsButtonGame.classList.add('hidden');
+      this.ratingElem = document.createElement('div');
+       
+      if (this.countErrors === 0) {
+        this.ratingElem.innerHTML = `<div class="results">Не допустил ни одной Ошибки. Ты молодец!!!</div>`;
+        // this.ratingElem.textContent = ;
+        
+      } else {
+        this.ratingElem.innerHTML = `<div class="results">У тебя ${this.countErrors} ошибок. Нужно ещё поучиться!</div>`;
+      }
 
-       checkUserChoose() {
-            if (this.firstWordOfNewArr === this.dataInfo) {
-              this.target.classList.add('disabledbutton');
-              this.newArrSounds.shift();
-              if (!this.newArrSounds.length) {
-                this.audio = new Audio('../../../audio/success.mp3');
-                this.audio.play();
-                // ЗДЕСЬ ЗАПУСКАЕМ Ф-Ю с РЕЗУЛЬТАТАМИ
-              } else {
-                this.audio = new Audio('../../../audio/correct.mp3');
-              this.audio.play();
-                this.startPlayContain();
-              }
-            } else {
-              this.audio = new Audio('../../../audio/error.mp3');
-              this.audio.play();
-            }
-       }
+      this.cardsContainer.append(this.ratingElem);
+
+      setTimeout(()=>{
+       
+        document.location.href = "#/main";
+  }, 3000)
+      // console.log('this.countErrors: ', this.countErrors);
+    }
 
       turnAroundCard() {
       // this.card.forEach(item =>  item.classList.add('is-flipped'));
