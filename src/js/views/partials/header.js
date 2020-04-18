@@ -11,17 +11,16 @@ class Header extends Component {
                 <span class="hamburger__line"></span>
             </span>
                 <ul class="navigation">
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Main Page' ? 'orange-link' : ''}" href="#/main">Main Page</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Action (Set A)' ? 'orange-link' : ''}" href="#/cards">Action (Set A)</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Action (Set B)' ? 'orange-link' : ''}" href="#/cards">Action (Set B)</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Animal (Set A)' ? 'orange-link' : ''}" href="#/cards">Animal (Set A)</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Animal (Set B)' ? 'orange-link' : ''}" href="#/cards">Animal (Set B)</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Clothes' ? 'orange-link' : ''}" href="#/cards">Clothes</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Emotion' ? 'orange-link' : ''}" href="#/cards">Emotion</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Transport' ? 'orange-link' : ''}" href="#/cards">Transport</a></li>
-                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Sport' ? 'orange-link' : ''}" href="#/cards">Sport</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Main Page' ? 'orange-link' : ''}" href="#/main"><i class="fas fa-home"></i>Main Page</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Action (Set A)' ? 'orange-link' : ''}" href="#/cards"><i class="fas fa-pencil-ruler"></i>Action (Set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Action (Set B)' ? 'orange-link' : ''}" href="#/cards"><i class="fas fa-running"></i>Action (Set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Animal (Set A)' ? 'orange-link' : ''}" href="#/cards"><i class="fas fa-dog"></i>Animal (Set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Animal (Set B)' ? 'orange-link' : ''}" href="#/cards"><i class="fas fa-frog"></i>Animal (Set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Clothes' ? 'orange-link' : ''}" href="#/cards"><i class="fas fa-tshirt"></i>Clothes</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Emotion' ? 'orange-link' : ''}" href="#/cards"><i class="far fa-smile"></i>Emotion</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Transport' ? 'orange-link' : ''}" href="#/cards"><i class="fas fa-car"></i>Transport</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Sport' ? 'orange-link' : ''}" href="#/cards"><i class="fas fa-volleyball-ball"></i>Sport</a></li>
                 </ul>
-
                 <label class="switch">
                     <input type="checkbox" class="switch__input" ${localStorage.inputChecked === 'true' ? 'checked' : ''}>
                     <span class="slider round"></span>
