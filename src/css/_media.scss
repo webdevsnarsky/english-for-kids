@@ -2,4 +2,20 @@
   .page-container {
     background: none;
   }
+
+  .main {
+    padding: 0;
+    margin: 20px 0 20px;
+  }
+
+  .cards {
+    margin: 0 0 20px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .navigation {
+    padding: 125px 20px 40px;
+    width: 250px;
+  }
 }

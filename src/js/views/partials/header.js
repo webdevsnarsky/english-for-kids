@@ -1,23 +1,25 @@
 import Component from '../../components/component';
+// eslint-disable-next-line import/no-cycle
 import {router} from '../../index';
 
 class Header extends Component {
 
     render() {
-
         this.html = 
         `<header class="header"> 
             <span class="header__hamburger hamburger">
                 <span class="hamburger__line"></span>
             </span>
                 <ul class="navigation">
-                    <li class="navigation__item"><a class="navigation__link active" href="#/main">Main Page</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Action (Set A)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Action (Set B)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Animal (Set A)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Animal (Set B)</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Clothes</a></li>
-                    <li class="navigation__item"><a class="navigation__link" href="#/cards">Emotion</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Main Page' ? 'orange-link' : ''}" href="#/main">Main Page</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Action (Set A)' ? 'orange-link' : ''}" href="#/cards">Action (Set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Action (Set B)' ? 'orange-link' : ''}" href="#/cards">Action (Set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Animal (Set A)' ? 'orange-link' : ''}" href="#/cards">Animal (Set A)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Animal (Set B)' ? 'orange-link' : ''}" href="#/cards">Animal (Set B)</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Clothes' ? 'orange-link' : ''}" href="#/cards">Clothes</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Emotion' ? 'orange-link' : ''}" href="#/cards">Emotion</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Transport' ? 'orange-link' : ''}" href="#/cards">Transport</a></li>
+                    <li class="navigation__item"><a class="navigation__link ${localStorage.Category === 'Sport' ? 'orange-link' : ''}" href="#/cards">Sport</a></li>
                 </ul>
 
                 <label class="switch">
@@ -52,7 +54,7 @@ class Header extends Component {
                 targetClassList.contains('hamburger__line') && !this.hamburger.classList.contains('toggle')): 
                     this.getNavigationMenu();
                 break;
-                case targetClassList.contains('toggle'):
+                case targetClassList.contains('toggle') || targetClassList.contains('navigation__link '):
                     this.removeNavigationMenu();
                 break;
                 case targetClassList.contains('navigation__link'): 
@@ -90,13 +92,16 @@ class Header extends Component {
 
     changeColorOfElem() {
         this.mainCard = document.querySelectorAll('.main__card');
+        this.allCardRotate = document.querySelectorAll('.card__rotate');
 
         switch (localStorage.inputChecked) {
             case 'true':
                 this.mainCard.forEach(card => card.classList.add('orange'));
+                this.allCardRotate.forEach(elem => elem.classList.add('hidden'));
                 break;
             case 'false':
                 this.mainCard.forEach(card => card.classList.remove('orange'));
+                this.allCardRotate.forEach(item => item.classList.remove('hidden'));
                 break;
             default:
                 break;
@@ -105,7 +110,9 @@ class Header extends Component {
 
       setDataOpenCategory() {
         localStorage.Category = this.target.textContent;
-        router();
+        setTimeout(()=>{
+            router();
+        }, 600);
       }
 }
 

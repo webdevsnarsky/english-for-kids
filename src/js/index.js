@@ -1,18 +1,15 @@
 import '../css/style.css';
 import '../css/style.scss';
-// import '../img/cry.jpg';
 
 import Utils from './helpers/utils';
-
+// eslint-disable-next-line import/no-cycle
 import Header from './views/partials/header';
 import Footer from './views/partials/footer';
 import Error404 from './views/pages/error404';
 import Cards from './views/pages/cards';
 
-
 import Home from './views/pages/home';
 import Main from './views/pages/main';
-
 
 const Routes = {
   '/': Home,
@@ -31,17 +28,14 @@ function router() {
   const parsedURL = `/${request.resource || ''}`;
   const page = Routes[parsedURL] ? new Routes[parsedURL]() : new Error404();
 
-
   headerContainer.innerHTML = header.render();
   contentContainer.innerHTML = page.render();
   footerContainer.innerHTML = footer.render();
-
 
   header.afterRender();
   page.afterRender();
   footer.afterRender();
 }
-
 
 window.addEventListener('load', router);
 window.addEventListener('hashchange', router);
@@ -50,8 +44,7 @@ window.addEventListener("unload", () => {
 });
 
 
-
-
+// eslint-disable-next-line import/prefer-default-export
 export {router};
 
 

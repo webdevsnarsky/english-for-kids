@@ -1,6 +1,6 @@
 .header-container {
   width: 100%;
-  background-color: gray;
+  background-color: #2A4A8B;
   margin: 0 auto;
 }
 
@@ -21,9 +21,9 @@
   padding: 125px 50px 40px;
   flex-direction: column;
   text-align: left;
-  background-color: #2D303A;
+  background-color: #2A4A8B;
   width: 270px;
-  height: 80%;
+  height: calc(80% - 20px);
   box-shadow: 20px 0px 20px rgba(0, 0, 0, 0.4);
   transition: transform 0.5s ease-in;
   transform: translateX(-108%);
@@ -40,7 +40,7 @@
   padding-top: 7px;
 }
 
-.navigation__item a {
+.navigation__link {
   display: block;
   height: 100%;
   text-decoration: none;
@@ -51,8 +51,12 @@
   letter-spacing: -0.005rem;
 }
 
+.orange-link {
+  color: #F59030;
+}
+
 .navigation__item a:hover {
-  color: red;
+  color: #F59030;
 }
 
 .active {
@@ -130,8 +134,8 @@ span.rotate {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 100px;
+  height: 40px;
 }
 
 .switch input {
@@ -152,30 +156,55 @@ span.rotate {
   transition: .4s;
 }
 
-.slider:before {
+.switch:after {
   position: absolute;
-  content: "";
+  content: "PLAY";
+  height: 26px;
+  width: 26px;
+  left: 51px;
+  bottom: 2px;
+  color: #FFA500;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.switch:before {
+  position: absolute;
+  content: "TRAIN";
   height: 26px;
   width: 26px;
   left: 4px;
-  bottom: 4px;
+  bottom: 2px;
+  color: #ccc;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 34px;
+  width: 34px;
+  left: 4px;
+  bottom: 3px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
+  z-index: 2;
 }
 
 input:checked+.slider {
-  background-color: #2196F3;
+  background-color: #FFA500;
 }
 
 input:focus+.slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #FFA500;
 }
 
 input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(58px);
+  -ms-transform: translateX(58px);
+  transform: translateX(58px);
 }
 
 .slider.round {

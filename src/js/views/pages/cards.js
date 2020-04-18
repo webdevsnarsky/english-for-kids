@@ -8,12 +8,9 @@ class Cards extends Component {
     this.CARDS = require('../../components/data-cards');
   }
 
-        // <audio class="audio" src=""></audio>
-        // <audio class="audio__btn-game"></audio>
     render() {
         this.html = 
-        `<button class="cards__button-game ${localStorage.inputChecked === 'true' ? '' : 'hidden'}" data-word="">Start game</button>
-        <div class="rating"></div>
+        `<div class="rating"></div>
         <div class="cards"></div>`;
 
       return this.html;
@@ -25,6 +22,7 @@ class Cards extends Component {
     }
 
     createCards() {
+      this.contentContainer = document.querySelector('.content-container');
       this.cardsContainer = document.querySelector('.cards');
       this.cardsButtonGame = document.querySelector('.cards__button-game');
       this.audioPlay = document.querySelector('.audio');
@@ -50,6 +48,12 @@ class Cards extends Component {
         case 'Emotion':
           this.i = 6;
         break;
+        case 'Transport':
+          this.i = 7;
+        break;
+        case 'Sport':
+          this.i = 8;
+        break;
         default:
         break;
       }
@@ -64,6 +68,9 @@ class Cards extends Component {
       </div>`;
       })
       this.cardsContainer.innerHTML += res;
+
+      this.createButtomGame = `<button class="cards__button-game ${localStorage.inputChecked === 'true' ? '' : 'hidden'}" data-word="">Start game</button>`;
+      this.contentContainer.innerHTML += this.createButtomGame
     }
 
     setActions() {
@@ -121,11 +128,14 @@ class Cards extends Component {
       this.target.closest('.card').classList.toggle('is-flipped');
       this.target.classList.add('hidden');
    
-      this.array = Array.from(this.contentCard)
+      this.array = Array.from(this.contentCard);
       this.array.forEach(item => {
         item.addEventListener('mouseleave', () => {
           item.classList.remove('is-flipped');
-          this.allCardRotate.forEach(elem => elem.classList.remove('hidden'));
+          if (localStorage.inputChecked === 'false') {
+            this.allCardRotate.forEach(elem => elem.classList.remove('hidden'));
+          }
+          
         });
       });
     }
@@ -157,7 +167,6 @@ class Cards extends Component {
       this.allCardRotate.forEach(item => item.classList.add('hidden'));
       this.cardsButtonGame.classList.remove('hidden');
       this.newArrSounds = this.arrayOfSounds.sort(() => Math.random() - 0.5);
-      this.allCardRotate.forEach(elem => elem.classList.add('hidden'));
       this.contentCard.forEach(elem => elem.classList.remove('orange'));
     }
 
@@ -168,8 +177,7 @@ class Cards extends Component {
       });
 
       this.allCardText.forEach(item => item.classList.remove('hidden'));
-      this.allCardRotate.forEach(item => item.classList.remove('hidden'));
-      // this.contentCard.forEach(item => item.classList.remove('green'));
+      this.contentCard.forEach(item => item.classList.remove('green'));
       this.contentCard.forEach(elem => elem.classList.add('orange'));
 
       this.cardsButtonGame.classList.add('hidden');
@@ -222,7 +230,7 @@ class Cards extends Component {
         setTimeout(()=>{
           this.target.closest('.card').classList.remove('darkred');
           this.target.classList.remove('disabledbutton');
-        }, 300)
+        }, 200)
         this.countErrors += 1;
         this.audio = new Audio('../../../audio/error.mp3');
         this.audio.play();
@@ -243,19 +251,19 @@ class Cards extends Component {
     }
 
     getfinishPage() {
-      this.cardsContainer.innerHTML = '';
+      this.contentContainer.innerHTML = '';
       this.ratingContainer.innerHTML = '';
       this.cardsButtonGame.classList.add('hidden');
       this.ratingElem = document.createElement('div');
       this.contentCard.forEach(item => item.classList.remove('green'));
        
       if (this.countErrors === 0) {
-        this.ratingElem.innerHTML = `<div class="results">Не допустил ни одной Ошибки. Ты молодец!!!</div>`;
+        this.ratingElem.innerHTML = `<div class="results">Ты не допустил ни одной Ошибки. Молодец!!!</div>`;
       } else {
-        this.ratingElem.innerHTML = `<div class="results">У тебя ${this.countErrors} ошибок. Нужно ещё поучиться!</div>`;
+        this.ratingElem.innerHTML = `<div class="results">You have ${this.countErrors} errors. You need to learn more!</div>`;
       }
 
-      this.cardsContainer.append(this.ratingElem);
+      this.contentContainer.append(this.ratingElem);
 
       setTimeout(()=>{
        

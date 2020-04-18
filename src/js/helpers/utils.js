@@ -1,8 +1,8 @@
 class Utils {
   
   static parseRequestURL() {
+      // eslint-disable-next-line no-restricted-globals
       const url = location.hash.slice(2);
-      // console.log('url: ', url);
       const request = {};
 
       [request.resource] = url.split('/');

@@ -9,7 +9,7 @@ class Footer extends Component {
     render() {
         
         this.html =
-        `<footer class="footer"><p class="footer__info">&copy; Все права защищены, 2020</p></footer>`
+        `<footer class="footer"><p class="footer__info">&copy; All rights reserved, 2020</p></footer>`
 
         return this.html;
     }

@@ -1,0 +1,24 @@
+.home__link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 30px 0 40px;
+  margin: 0 20px;
+  background: linear-gradient(-135deg, #00E5FE, #2A4A8B);
+
+  border-width: 0;
+  border-radius: 50px;
+  font-size: 14px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.home__link:hover {
+  box-shadow: 0 10px 55px #2A4A8B;
+  transition: .5s;
+}

@@ -5,6 +5,7 @@ class Component {
         this.request = Utils.parseRequestURL();
     }
 	
+    // eslint-disable-next-line class-methods-use-this
     afterRender() {}
 }
 

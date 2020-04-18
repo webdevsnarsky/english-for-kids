@@ -299,6 +299,106 @@ const CARDS = [
       image: 'img/laugh.jpg',
       audioSrc: 'audio/laugh.mp3'
     }
+  ],
+  [
+    {
+      word: 'airplane',
+      translation: 'самолет',
+      image: 'img/airplane.jpg',
+      audioSrc: 'audio/airplane.mp3'
+    },
+    {
+      word: 'balloon',
+      translation: 'воздушный шар',
+      image: 'img/balloon.jpg',
+      audioSrc: 'audio/balloon.mp3'
+    },
+    {
+      word: 'bus',
+      translation: 'автобус',
+      image: 'img/bus.png',
+      audioSrc: 'audio/bus.mp3'
+    },
+    {
+      word: 'cab',
+      translation: 'такси',
+      image: 'img/cab.jpg',
+      audioSrc: 'audio/cab.mp3'
+    },
+    {
+      word: 'ship',
+      translation: 'корабль',
+      image: 'img/ship.jpg',
+      audioSrc: 'audio/ship.mp3'
+    },
+    {
+      word: 'train',
+      translation: 'поезд',
+      image: 'img/train.png',
+      audioSrc: 'audio/train.mp3'
+    },
+    {
+      word: 'tram',
+      translation: 'трамвай',
+      image: 'img/tram.jpg',
+      audioSrc: 'audio/tram.mp3'
+    },
+    {
+      word: 'truck',
+      translation: 'грузовик',
+      image: 'img/truck.jpg',
+      audioSrc: 'audio/truck.mp3'
+    },
+  ],
+  [
+    {
+      word: 'basketball',
+      translation: 'баскебол',
+      image: 'img/basketball.jpg',
+      audioSrc: 'audio/basketball.mp3'
+    },
+    {
+      word: 'bowling',
+      translation: 'боулинг',
+      image: 'img/bowling.jpg',
+      audioSrc: 'audio/bowling.mp3'
+    },
+    {
+      word: 'football',
+      translation: 'футбол',
+      image: 'img/football.jpg',
+      audioSrc: 'audio/football.mp3'
+    },
+    {
+      word: 'golf',
+      translation: 'гольф',
+      image: 'img/golf.jpg',
+      audioSrc: 'audio/golf.mp3'
+    },
+    {
+      word: 'hockey',
+      translation: 'хоккей',
+      image: 'img/hockey.jpg',
+      audioSrc: 'audio/hockey.mp3'
+    },
+    {
+      word: 'race',
+      translation: 'гонка',
+      image: 'img/race.jpg',
+      audioSrc: 'audio/race.mp3'
+    },
+    {
+      word: 'tennis',
+      translation: 'теннис',
+      image: 'img/tennis.jpg',
+      audioSrc: 'audio/tennis.mp3'
+    },
+    {
+      word: 'volleyball',
+      translation: 'волейбол',
+      image: 'img/volleyball.jpg',
+      audioSrc: 'audio/volleyball.mp3'
+    }
   ]
 ]
 
