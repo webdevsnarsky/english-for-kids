@@ -6,7 +6,7 @@ class Header extends Component {
     render() {
 
         this.html = 
-        `<header class="header">  
+        `<header class="header"> 
             <span class="header__hamburger hamburger">
                 <span class="hamburger__line"></span>
             </span>
@@ -43,14 +43,11 @@ class Header extends Component {
            this.getCheckedInput();
         });
 
-        this.header.addEventListener('click', event => {
+        this.header.addEventListener('click', (event) => {
             this.target = event.target;
             const targetClassList = this.target.classList;
             
             switch (true) {
-                // case (localStorage.inputChecked === 'true' && (targetClassList.contains('card__face'))):
-                //     this.startGameMode();
-                // break;
                 case (targetClassList.contains('hamburger') && !this.target.classList.contains('toggle') ||
                 targetClassList.contains('hamburger__line') && !this.hamburger.classList.contains('toggle')): 
                     this.getNavigationMenu();
@@ -83,11 +80,9 @@ class Header extends Component {
         if (localStorage.inputChecked === 'false')  {
             localStorage.inputChecked = 'true';
             this.inputChecked = true;
-            // this.startGameMode();
         } else {
             localStorage.inputChecked = 'false';
             this.inputChecked = false;
-            // this.stopGameMode();
         }
         
         this.changeColorOfElem();
@@ -95,16 +90,13 @@ class Header extends Component {
 
     changeColorOfElem() {
         this.mainCard = document.querySelectorAll('.main__card');
-        this.categoryCard = document.querySelectorAll('.category__card');
 
         switch (localStorage.inputChecked) {
             case 'true':
-                this.mainCard.forEach(card => card.classList.add('green'));
-                this.categoryCard.forEach(card => card.classList.add('green'));
+                this.mainCard.forEach(card => card.classList.add('orange'));
                 break;
             case 'false':
-                this.mainCard.forEach(card => card.classList.remove('green'));
-                this.categoryCard.forEach(card => card.classList.remove('green'));
+                this.mainCard.forEach(card => card.classList.remove('orange'));
                 break;
             default:
                 break;
@@ -114,11 +106,7 @@ class Header extends Component {
       setDataOpenCategory() {
         localStorage.Category = this.target.textContent;
         router();
-
-        // clear container 
-        // 
       }
-
 }
 
 export default Header;

@@ -2,22 +2,26 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 auto 25px;
 }
 
 .category__card {
+  width: 250px;
+  height: 250px;
   border-radius: 5px;
   color: #212529;
   font-size: 24px;
   text-decoration: none;
-  background-color: gray;
   margin: 10px;
   perspective: 600px;
 }
 
-.category__card:hover {
-  background-color: green;
-  box-shadow: 0 4px 7px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+.orange {
+  background-color: orange;
+}
+
+.orange:hover {
+  background-color: orange;
 }
 
 .green.category__card,
@@ -26,16 +30,23 @@
 }
 
 .card {
-  width: 250px;
-  height: 250px;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-  cursor: pointer;
   position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+  border-radius: 5px;
+  transition: transform 1s;
+  // transition: background-color .2s ease .1s;
+  transform-style: preserve-3d;
+  background-color: rgba(128, 128, 128, 0.8);
 }
 
 .card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card.is-flipped-2 {
   transform: rotateY(180deg);
 }
 
@@ -54,10 +65,6 @@
 }
 
 .card__face--back {
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
   transform: rotateY(180deg);
 }
 
@@ -69,8 +76,7 @@
   text-align: center;
   width: 100%;
   pointer-events: none;
-  // background: #fff;
-  color: #212529;
+  color: white;
   border-radius: 5px;
 }
 
@@ -81,12 +87,21 @@
   background-image: url("../img/rotate.png");
   background-size: 32px;
   background-repeat: no-repeat;
-  background-position: center 16px;
+  background-position: center;
   bottom: 5px;
   right: 5px;
   -webkit-transition: .3s;
   transition: .3s;
-  // background: gray;
+}
+
+.card__rotate:hover {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(-360deg);
+  }
 }
 
 .hidden {
@@ -108,12 +123,19 @@
   opacity: 0.4;
 }
 
+.darkred {
+  background-color: darkred;
+}
+
+.darkred:hover {
+  background-color: darkred;
+}
+
 .rating {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   height: 40px;
-  // overflow-x: hidden;
   overflow-y: hidden;
   margin: 0 40px;
 }

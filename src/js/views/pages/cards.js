@@ -55,8 +55,8 @@ class Cards extends Component {
       }
       this.CARDS.default[this.i].forEach(card => {
         res += 
-      `<div class="category__card ${localStorage.inputChecked === 'true' ? 'green' : ''}">
-        <div class="card">
+      `<div class="category__card">
+        <div class="card ${localStorage.inputChecked === 'true' ? '' : 'orange'}">
           <div class="card__face ${localStorage.inputChecked === 'true' ? 'card__cover' : ''}" data-info="${card.word}" style="background-image: url(${card.image});"><span class="card__text ${localStorage.inputChecked === 'true' ? 'hidden' : ''}">${card.word}</span></div>
           <div class="card__face card__face--back" style="background-image: url(${card.image});"><span class="card__text">${card.translation}</span></div>
           <div class="card__rotate ${localStorage.inputChecked === 'true' ? 'hidden' : ''}"></div>
@@ -81,14 +81,6 @@ class Cards extends Component {
       this.newArrSounds = this.arrayOfSounds.sort(() => Math.random() - 0.5);
       this.cardsButtonGame.addEventListener('click', () => {this.startPlayContain()});
       this.countErrors = 0;
-
-     // добавление карточек крутящихся
-     
-      // this.cardRotate = document.querySelector('.card__rotate');
-      // this.card = document.querySelector('.card');
-      // this.cardRotate.addEventListener( 'click', () => {
-      //   this.card.classList.toggle('is-flipped');
-      //   });
 
         this.switchInput.addEventListener('change', () => {
           this.getCheckedInput();
@@ -115,11 +107,27 @@ class Cards extends Component {
             && this.cardsButtonGame.classList.contains('repeat')):
               this.checkUserChoose();
               break;
-
+            case (targetClassList.contains('card__rotate') 
+            && !this.target.closest('.card').classList.contains('is-flipped')):
+              this.getTurnAroundCard();
+              break;
             default:
               break;
           }
         });
+    }
+
+    getTurnAroundCard() {
+      this.target.closest('.card').classList.toggle('is-flipped');
+      this.target.classList.add('hidden');
+   
+      this.array = Array.from(this.contentCard)
+      this.array.forEach(item => {
+        item.addEventListener('mouseleave', () => {
+          item.classList.remove('is-flipped');
+          this.allCardRotate.forEach(elem => elem.classList.remove('hidden'));
+        });
+      });
     }
 
     getArrayOfAudio() {
@@ -149,6 +157,8 @@ class Cards extends Component {
       this.allCardRotate.forEach(item => item.classList.add('hidden'));
       this.cardsButtonGame.classList.remove('hidden');
       this.newArrSounds = this.arrayOfSounds.sort(() => Math.random() - 0.5);
+      this.allCardRotate.forEach(elem => elem.classList.add('hidden'));
+      this.contentCard.forEach(elem => elem.classList.remove('orange'));
     }
 
     stopGameMode() {
@@ -159,14 +169,14 @@ class Cards extends Component {
 
       this.allCardText.forEach(item => item.classList.remove('hidden'));
       this.allCardRotate.forEach(item => item.classList.remove('hidden'));
-      this.contentCard.forEach(item => item.classList.remove('green'));
+      // this.contentCard.forEach(item => item.classList.remove('green'));
+      this.contentCard.forEach(elem => elem.classList.add('orange'));
 
       this.cardsButtonGame.classList.add('hidden');
       this.arrayOfSounds = [];
       this.newArrSounds = [];
       this.getArrayOfAudio();
       this.ratingContainer.innerHTML = '';
-
     }
 
     startPlayContain () {
@@ -207,6 +217,12 @@ class Cards extends Component {
         }
       } else {
         this.rating = false;
+        this.target.closest('.card').classList.add('darkred');
+        this.target.classList.add('disabledbutton');
+        setTimeout(()=>{
+          this.target.closest('.card').classList.remove('darkred');
+          this.target.classList.remove('disabledbutton');
+        }, 300)
         this.countErrors += 1;
         this.audio = new Audio('../../../audio/error.mp3');
         this.audio.play();
@@ -221,7 +237,6 @@ class Cards extends Component {
       if (!this.rating) {
         this.ratingElem.innerHTML = `<div class="rating__elem rating__error"></div>`;
       } else {
-        // this.ratingElemCorrect = `<div class="rating__elem rating__correct"></div>`;
         this.ratingElem.innerHTML = `<div class="rating__elem rating__correct"></div>`;
       }
       this.ratingContainer.prepend(this.ratingElem);
@@ -236,8 +251,6 @@ class Cards extends Component {
        
       if (this.countErrors === 0) {
         this.ratingElem.innerHTML = `<div class="results">Не допустил ни одной Ошибки. Ты молодец!!!</div>`;
-        // this.ratingElem.textContent = ;
-        
       } else {
         this.ratingElem.innerHTML = `<div class="results">У тебя ${this.countErrors} ошибок. Нужно ещё поучиться!</div>`;
       }
@@ -248,15 +261,7 @@ class Cards extends Component {
        
         document.location.href = "#/main";
   }, 3000)
-      // console.log('this.countErrors: ', this.countErrors);
     }
-
-      turnAroundCard() {
-      // this.card.forEach(item =>  item.classList.add('is-flipped'));
-      // .classList.add('is-flipped');
-    }
-
-
 }
 
 export default Cards;
