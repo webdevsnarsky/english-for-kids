@@ -89,7 +89,7 @@ const CARDS = [
     },
     {
       word: 'skip',
-      translation: 'пропускать, прыгать',
+      translation: 'прыгать',
       image: 'img/skip.jpg',
       audioSrc: 'audio/skip.mp3'
     },
@@ -309,7 +309,7 @@ const CARDS = [
     },
     {
       word: 'balloon',
-      translation: 'воздушный шар',
+      translation: 'аэростат',
       image: 'img/balloon.jpg',
       audioSrc: 'audio/balloon.mp3'
     },
